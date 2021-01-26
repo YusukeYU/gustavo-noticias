@@ -1,0 +1,207 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+a,
+p,
+ul {
+    text-decoration: none;
+    margin: 0;
+    color: black;
+    padding: 0;
+}
+
+.col-default {
+    width: 100%;
+    float: left;
+}
+
+.first-header {
+    background-color: #272f32;
+    height: 41px;
+    max-height: 41px;
+}
+
+.header-imgs img {
+    height: 20px;
+    float: right;
+    padding: .6rem;
+}
+
+.phone-number {
+    height: 20px;
+    float: left;
+    padding: .62rem;
+}
+
+.phone-number p {
+    color: #fbfcfe;
+    font-size: 13px;
+}
+
+.nav-bar {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.content {
+    padding: 0 10rem;
+}
+
+.nav-bar ul li {
+    display: inline-block;
+    padding: 0 3rem;
+}
+
+.nav-bar ul {
+    margin: .5rem 0;
+}
+
+.nav-bar ul li a:hover {
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #272f32;
+}
+
+.img-background img {
+    float: left;
+    width: 100%;
+}
+
+.show {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.show h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.show ul li h3 {
+    font-weight: normal;
+}
+
+.show ul li {
+    display: inline-block;
+    max-width: 33.1%;
+    width: 33.1%;
+}
+
+.show ul li img {
+    height: 100px;
+}
+
+.show ul li p {
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.title {
+    margin: 2rem 0;
+}
+
+.title img {
+    height: 33px;
+}
+
+.footer {
+    color: #ffffff;
+    background-color: #272f32;
+    text-align: center;
+    padding: 2rem;
+}
+
+.footer h3 {
+    font-weight: 300;
+}
+
+.footer p {
+    font-weight: 300;
+    font-size: 13px;
+    color: #ffffff;
+}
+
+.new-form {
+    text-align: center;
+}
+
+.new-form h1 {
+    font-weight: 300;
+}
+
+.new-form form input {
+    margin: .9rem 0;
+    padding: .3rem;
+    width: 250px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.new-form form textarea {
+    width: 250px;
+}
+
+.new-form form button {
+    margin-bottom: 2rem;
+    padding: .3rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #272f32;
+    border: none;
+}
+
+.new-form form button:hover {
+    cursor: pointer;
+    color: #272f32;
+    background-color: #ffffff;
+    ;
+}
+
+.msg {
+    text-align: center;
+    margin: 9rem 0;
+}
+
+.msg p {
+    color: rgb(89, 134, 20);
+}
+
+.msg h1 {
+    font-weight: 300;
+}
+
+.news {
+    text-align: center;
+}
+
+@media only screen and (max-width: 980px) {
+    .content {
+        padding: 0 7rem;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .content {
+        padding: 0 5rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header-imgs,
+    .phone-number,
+    .nav-bar,
+    .img-background {
+        display: none;
+    }
+    .img-background-mobile {
+        display: inherit!important;
+    }
+    .img-background-mobile img {
+        float: left!important;
+        width: 100%!important;
+    }
+}
