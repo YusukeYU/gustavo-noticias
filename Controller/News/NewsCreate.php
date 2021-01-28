@@ -11,57 +11,55 @@ use Models\News;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         /***************************
+         *   HEADERS
+         */
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers:, *");
+        header('Access-Control-Allow-Credentials', true);
+        header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        /***************************
+         *   DATA
+         */
+
+        $data = json_decode(file_get_contents("php://input"), false);
+        $data2 = array($data->title, $data->slug, $data->description, $data->content, $data->photo, $data->keyword);
+        /***************************
          *   VALIDATIONS START
          */
-        $input = $_POST['title'];
-        $output = $_POST['title'];
-        file_put_contents($output, file_get_contents($input));
-        $data = array($_POST['title'], $_POST['slug'], $_POST['description'], $_POST['content'], $_POST['photo']);
-
         // verifica se os campos estão sendo informados corretament
-        if (in_array(null, $data)) {
-            //   header("HTTP/1.1 200 Ok");
-
-            header('Location: ' . 'http://localhost/gustavo-noticias/Views/error.html');
+        if (in_array(null, $data2)) {
+            echo json_encode("Necessário preencher todos os campos!");
             exit;
         }
-
-        /***************************
-         *   VALIDATIONS END
-         */
-
         // instancia novo objeto model e atribui dados recebidos da requisicao;
         $news = new News();
-        $news->setTitle($_POST['title']);
-        $news->setSlug($_POST['slug']);
-        $news->setKeyword($_POST['keyword']);
-        $news->setDescription($_POST['description']);
-        $news->setContent($_POST['content']);
-        $news->setPhoto($_POST['photo']);
+        $news->setTitle($data->title);
+        $news->setSlug($data->slug);
+        $news->setKeyword($data->keyword);
+        $news->setDescription($data->description);
+        $news->setContent($data->content);
+        $news->setPhoto($data->photo);
         // enviamos os dados para o repositório salvar no banco
         $newsRepository = new NewsRepository();
-        $finded = $newsRepository->findByTitle($_POST['title']);
-        if (is_array($finded) && $finded['title'] == $_POST['title']) {
-            echo json_encode("O Titulo mencionado consta cadastrado no sistema!");
-            header('Location: ' . 'http://localhost/gustavo-noticias/Views/error.html');
+        $finded = $newsRepository->findByTitle($data->title);
+        if (is_array($finded) && $finded['title'] == $data->title) {
+            header("HTTP/1.1 200 Ok");
+            echo json_encode("Título já cadastrado, favor escolher outro.");
             exit;
         }
 
         $added = $newsRepository->create($news);
         echo json_encode("Cadastrado com sucesso!");
-        //   header("HTTP/1.1 200 Ok");
-        header('Location: ' . 'http://localhost/gustavo-noticias/Views/success.html');
+        header("HTTP/1.1 200 Ok");
         exit;
 
     } catch (\Exception $e) {
-        //header("HTTP/1.1 500 Ok");
-        header('Location: ' . 'http://localhost/gustavo-noticias/Views/error.html');
+        header("HTTP/1.1 500 Ok");
         echo json_encode("Houve um erro ao processar, contate o administrador!");
     }
 
 } else {
-    //   header("HTTP/1.1 401 Unauthorized");
-    header('Location: ' . 'http://localhost/gustavo-noticias/Views/error.html');
-    echo json_encode("Metodo nao aceito pela API!");
+    header("HTTP/1.1 401 Unauthorized");
+    echo json_encode("Método não aceito pela API!");
     exit;
 }

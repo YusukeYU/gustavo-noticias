@@ -48,7 +48,7 @@ class NewsRepository implements INews
             $p_sql->bindValue(":description", $news->getDescription());
             $p_sql->bindValue(":content", $news->getContent());
             $p_sql->bindValue(":keyword", $news->getKeyword());
-            $p_sql->bindValue(":photo", $news->getContent());
+            $p_sql->bindValue(":photo", $news->getPhoto());
  
 
             return $p_sql->execute();
@@ -72,7 +72,6 @@ class NewsRepository implements INews
                 slug = :slug,
                 description = :description,
                 content = :content,
-                photo = :photo,
                 keyword = :keyword
                 WHERE id = :id";
 
@@ -84,7 +83,6 @@ class NewsRepository implements INews
             $p_sql->bindValue(":description", $news->getDescription());
             $p_sql->bindValue(":keyword", $news->getKeyword());
             $p_sql->bindValue(":content", $news->getContent());
-            $p_sql->bindValue(":photo", $news->getPhoto());
             return $p_sql->execute();
         } catch (\Exception $e) {
             return $e->getMessage();

@@ -1,3 +1,15 @@
+<?php
+require_once "../../Infrastructure/Repositories/NewsRepository.php";
+require_once "../../Models/News.php";
+
+use Infrastructure\Repositories\NewsRepository;
+use Models\News;
+$_GET['id'];
+
+$newsRepository = new NewsRepository();
+$finded = $newsRepository->findById((int)$_GET['id']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,30 +59,28 @@
 
     <div style="border-top: solid 1px;" class="col-default">
         <div class="new-form">
-            <h1> Nova Notícia</h1>
+            <h1> Atualizar Notícia</h1>
             <div class="col-default">
                 <div id="msg-success" class="msg-success">
-                    <h3>Notícia cadastrada com sucesso!</h3>
+                    <h3>Notícia atualizada com sucesso!</h3>
                 </div>
             </div>
-            <form id="main-form" enctype="multipart/form-data" action="http://localhost/gustavo-noticias/Controller/News/NewsAddPhoto.php" method="POST">
+            <form id="main-form" action="#" method="POST">
                 <label>Título</label> <br>
-                <input id="title" maxlength="45" name="title" placeholder="Título" type="text"> <br>
+                <input id="id"   type="hidden" value="<?php echo $finded['id'] ?>"> <br>
+                <input id="title" maxlength="45" name="title" placeholder="Título" type="text" value="<?php echo $finded['title'] ?>"> <br>
                 <label>Slug</label> <br>
-                <input id="slug" maxlength="45" name="slug" placeholder="Slug" type="text"><br>
+                <input id="slug" maxlength="45" name="slug" placeholder="Slug" type="text" value="<?php echo $finded['slug'] ?>"><br>
                 <label>Descrição</label> <br>
-                <input id="description" maxlength="60" name="description" placeholder="Descrição" type="text"><br>
-                <label>Foto</label> <br>
-                <input id="photo2" name="photo2" placeholder="Foto" type="file"><br>
+                <input id="description" maxlength="60" name="description" placeholder="Descrição" type="text" value="<?php echo $finded['description'] ?>"><br>
                 <label>Palavra Chave</label> <br>
-                <input id="keyword" maxlength="45" name="keyword" placeholder="Palavra Chave" type="text"><br>
+                <input id="keyword" maxlength="45" name="keyword" placeholder="Palavra Chave" type="text" value="<?php echo $finded['keyword'] ?>"><br>
                 <label>Conteúdo</label> <br>
-                <textarea id="content" maxlength="244" rows="4" name="content"> </textarea> <br>
+                <textarea id="content" maxlength="244" rows="4" name="content"> <?php echo $finded['content'] ?></textarea> <br>
                 <button type="button" onClick="create()"> Salvar</button>
             </form>
         </div>
     </div>
-
     <!-- footer-->
     <div class="col-default">
         <div class="footer">
@@ -81,7 +91,7 @@
         </div>
     </div>
 
-    <script charset="UTF-8" src="js/main.js" type="text/javascript">
+    <script charset="UTF-8" src="js/update.js" type="text/javascript">
     </script>
 </body>
 
